@@ -1,0 +1,139 @@
+{
+  "project_name": "mouse_navigation_llm_doe",
+  "project_root": "..",
+  "analysis_goal": "Analyze mouse navigation performance by stimulation paradigm for the five paradigms Combined, ICMS Only, Dim Visual Only, Bright Visual Only, and Sham, using only Time-to-Target, Success, Path Efficiency, Average Speed, and AD (angular dispersion).",
+  "system_prompt": "You are a careful statistician and experimental analysis assistant. Work only from the supplied data artifacts and only from the requested stimulation paradigms and performance variables. If a claim is uncertain, say so explicitly.",
+  "backend": {
+    "provider": "together",
+    "base_url": "https://api.together.ai/v1",
+    "api_key_env": "TOGETHER_API_KEY",
+    "timeout_seconds": 900,
+    "response_format": "json"
+  },
+  "data": {
+    "csv_path": "data.csv",
+    "sample_rows": 40,
+    "sample_seed": 51400,
+    "columns_to_keep": [
+      "Mouse",
+      "Stim Paradigm",
+      "Time-to-Target",
+      "Success",
+      "Path Efficiency",
+      "Average Speed",
+      "AD"
+    ],
+    "row_filters": [
+      {
+        "column": "Stim Paradigm",
+        "include": [
+          "Combined",
+          "ICMS Only",
+          "Dim Visual Only",
+          "Bright Visual Only",
+          "Sham"
+        ]
+      }
+    ],
+    "numeric_columns": [
+      "Time-to-Target",
+      "Success",
+      "Path Efficiency",
+      "Average Speed",
+      "AD"
+    ],
+    "group_summaries": [
+      {
+        "name": "summary_by_stim_paradigm",
+        "keys": ["Stim Paradigm"],
+        "metrics": [
+          "Success",
+          "Time-to-Target",
+          "Path Efficiency",
+          "Average Speed",
+          "AD"
+        ]
+      },
+      {
+        "name": "summary_by_mouse_and_stim_paradigm",
+        "keys": ["Mouse", "Stim Paradigm"],
+        "metrics": [
+          "Success",
+          "Time-to-Target",
+          "Path Efficiency",
+          "Average Speed",
+          "AD"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "dir": "artifacts/data"
+  },
+  "data_views": {
+    "summary_only": {
+      "artifacts": ["overview_markdown"]
+    },
+    "stim_summary": {
+      "artifacts": ["overview_markdown", "summary_by_stim_paradigm"]
+    },
+    "stim_and_mouse_summary": {
+      "artifacts": ["overview_markdown", "summary_by_stim_paradigm", "summary_by_mouse_and_stim_paradigm", "sample_rows"]
+    }
+  },
+  "run_defaults": {
+    "inference_options": {
+      "max_tokens": 1800,
+      "reasoning": {
+        "enabled": false
+      }
+    }
+  },
+  "design": {
+    "replications": 3,
+    "random_seed": 51400,
+    "randomize": true,
+    "factors": [
+      {
+        "name": "model",
+        "levels": [
+          {
+            "label": "kimi",
+            "model": "moonshotai/Kimi-K2.5"
+          },
+          {
+            "label": "deepseek_v3_1",
+            "model": "deepseek-ai/DeepSeek-V3.1"
+          },
+          {
+            "label": "qwen3_5_9b",
+            "model": "Qwen/Qwen3.5-9B"
+          }
+        ]
+      },
+      {
+        "name": "temperature",
+        "levels": [0.0, 0.25, 0.5, 0.75, 1.0]
+      },
+      {
+        "name": "prompt_template",
+        "levels": [
+          "prompts/stim_paradigm_basic.md",
+          "prompts/stim_paradigm_anova.md",
+          "prompts/stim_paradigm_predictive.md"
+        ]
+      },
+      {
+        "name": "data_view",
+        "levels": [
+          "summary_only",
+          "stim_summary",
+          "stim_and_mouse_summary"
+        ]
+      }
+    ]
+  },
+  "outputs": {
+    "dir": "outputs"
+  }
+}

@@ -1,0 +1,16 @@
+"metric","value"
+"Completed runs",405
+"Treatment combinations",135
+"Replications per treatment",3
+"Valid JSON responses",377
+"JSON validity rate",0.9309
+"Length-capped responses",28
+"Length-cap rate",0.0691
+"Total input tokens",953145
+"Total output tokens",436746
+"Total tokens",1389891
+"Mean wall-clock seconds per run",28.097
+"Total wall-clock seconds across runs",11379.44
+"Reported Together cost (USD)",1.11
+"Estimated direct token cost for final 405-run sweep (USD)",1.0476
+"Average reported cost per run (USD)",0.00274

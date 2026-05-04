@@ -1,0 +1,10 @@
+"model","data_view","total_token_count"
+"deepseek-ai/DeepSeek-V3.1","summary_only",1819.15555555556
+"moonshotai/Kimi-K2.5","summary_only",2149.31111111111
+"Qwen/Qwen3.5-9B","summary_only",2213.77777777778
+"deepseek-ai/DeepSeek-V3.1","stim_summary",1909.35555555556
+"moonshotai/Kimi-K2.5","stim_summary",2509.73333333333
+"Qwen/Qwen3.5-9B","stim_summary",2600.51111111111
+"deepseek-ai/DeepSeek-V3.1","stim_and_mouse_summary",4813.11111111111
+"moonshotai/Kimi-K2.5","stim_and_mouse_summary",5465.46666666667
+"Qwen/Qwen3.5-9B","stim_and_mouse_summary",7406.04444444444

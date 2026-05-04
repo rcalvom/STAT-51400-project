@@ -1,0 +1,6 @@
+"factor","levels","notes"
+"Model","3: DeepSeek-V3.1, Kimi-K2.5, Qwen3.5-9B","Together AI serverless models with reasoning disabled."
+"Temperature","5: 0.00, 0.25, 0.50, 0.75, 1.00","Treated as a categorical factor."
+"Prompt template","3: basic, ANOVA, predictive","Increasing inferential specificity across the three prompts."
+"Data view","3: summary_only, stim_summary, stim_and_mouse_summary","Controls how much dataset context is exposed to the model."
+"Replication","3 repeated runs per treatment combination","Full factorial CRD: 3 x 5 x 3 x 3 x 3 = 405 runs."
