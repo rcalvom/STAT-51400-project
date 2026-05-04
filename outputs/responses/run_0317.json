@@ -1,0 +1,52 @@
+{
+  "run_id": 317,
+  "system_prompt": "You are a careful statistician and experimental analysis assistant. Work only from the supplied data artifacts and only from the requested stimulation paradigms and performance variables. If a claim is uncertain, say so explicitly.",
+  "user_prompt": "You are running experiment `mouse_navigation_llm_doe`.\n\nRun metadata:\n- Run ID: `317`\n- Replication: `3`\n- Factor levels: `data_view=stim_summary, model=deepseek_v3_1, prompt_template=prompts/stim_paradigm_basic.md, temperature=0.0`\n- Data view: `stim_summary`\n\nPrimary task:\nAnalyze mouse navigation performance by stimulation paradigm for the five paradigms Combined, ICMS Only, Dim Visual Only, Bright Visual Only, and Sham, using only Time-to-Target, Success, Path Efficiency, Average Speed, and AD (angular dispersion).\n\nAnalyze performance by stimulation paradigm using only these five performance variables:\n- Time-to-Target\n- Success\n- Path Efficiency\n- Average Speed\n- AD\n\nInterpret AD as angular dispersion. Restrict attention to the five stimulation paradigms in the supplied data artifacts:\n- Combined\n- ICMS Only\n- Dim Visual Only\n- Bright Visual Only\n- Sham\n\nUse only the supplied artifacts below:\n\n## Artifact: overview_markdown\nSource file: dataset_overview.md\n```md\n# Dataset overview\n\n- Source rows: 78687\n- Rows after filters: 76655\n- Columns: 7\n- Column names: Mouse, Stim Paradigm, Time-to-Target, Success, Path Efficiency, Average Speed, AD\n- Row filters: [{'column': 'Stim Paradigm', 'include': ['Combined', 'ICMS Only', 'Dim Visual Only', 'Bright Visual Only', 'Sham']}]\n\n## Numeric summary\n\n- Time-to-Target: n=76655, missing=0, mean=2.806219, sd=2.081249, min=0.5, max=201.393291\n- Success: n=76655, missing=0, mean=0.729502, sd=0.44422, min=0.0, max=1.0\n- Path Efficiency: n=76655, missing=0, mean=0.474522, sd=0.466763, min=0.000928, max=29.817273\n- Average Speed: n=76655, missing=0, mean=12.504409, sd=4.461985, min=0.121914, max=75.350076\n- AD: n=76655, missing=0, mean=0.376686, sd=0.240308, min=0.0006, max=1.0\n\n## Categorical summary\n\n- Mouse: 8 levels. Top values: SC21LM (10986), SC21L1RF (10972), SC21L1RM (10815), SC21RM (10654), SC21RF (10572), SC11L1RF (7837), SC11RF (7586), SC11LM (7233)\n- Stim Paradigm: 5 levels. Top values: Combined (48846), ICMS Only (11378), Dim Visual Only (9603), Sham (3505), Bright Visual Only (3323)\n\n## Missingness\n\n```\n\n## Artifact: summary_by_stim_paradigm\nSource file: summary_by_stim_paradigm.csv\n```csv\nStim Paradigm,n,mean_Success,mean_Time-to-Target,mean_Path Efficiency,mean_Average Speed,mean_AD\nBright Visual Only,3323,0.784532,2.613604,0.503589,12.679067,0.38675\nCombined,48846,0.779798,2.561687,0.502167,12.833136,0.399436\nDim Visual Only,9603,0.673331,3.140079,0.434403,11.968062,0.335571\nICMS Only,11378,0.685446,3.052511,0.432378,12.039282,0.354107\nSham,3505,0.273324,4.68242,0.308436,10.737034,0.236035\n\n```\n\nReturn valid JSON only with these keys:\n- `research_question`\n- `stim_paradigms_compared`\n- `response_variables`\n- `descriptive_findings`\n- `strongest_group_differences`\n- `practical_interpretation`\n- `limitations`\n- `recommended_next_analysis`\n\nUse exactly those eight top-level keys and no others.\nDo not use performance-variable names or stimulation-paradigm names as top-level keys.\nDo not return placeholder values like \"string\"; fill each field with real content from the supplied artifacts.\nUse this JSON shape:\n{\n  \"research_question\": \"string\",\n  \"stim_paradigms_compared\": [\"string\"],\n  \"response_variables\": [\"string\"],\n  \"descriptive_findings\": [\"string\"],\n  \"strongest_group_differences\": [\"string\"],\n  \"practical_interpretation\": \"string\",\n  \"limitations\": [\"string\"],\n  \"recommended_next_analysis\": \"string\"\n}\n",
+  "response": {
+    "model": "deepseek-ai/DeepSeek-V3.1",
+    "response": "{\n  \"research_question\": \"How do different stimulation paradigms affect mouse navigation performance across five key metrics\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"descriptive_findings\": [\n    \"Sham stimulation shows poorest performance across all metrics with lowest success rate (27.3%), highest time-to-target (4.68s), lowest path efficiency (0.31), lowest average speed (10.74), and lowest angular dispersion (0.24)\",\n    \"Bright Visual Only and Combined paradigms show best overall performance with success rates around 78%, time-to-target around 2.6s, path efficiency around 0.50, and average speed around 12.7\",\n    \"Dim Visual Only and ICMS Only show intermediate performance with success rates around 67-69%, time-to-target around 3.0-3.1s, and path efficiency around 0.43\",\n    \"Angular dispersion (AD) follows a similar pattern with highest values in Combined (0.40) and Bright Visual Only (0.39), intermediate in ICMS Only (0.35) and Dim Visual Only (0.34), and lowest in Sham (0.24)\"\n  ],\n  \"strongest_group_differences\": [\n    \"Sham vs all active stimulation paradigms shows largest performance gap across all metrics\",\n    \"Bright Visual Only vs Dim Visual Only shows substantial difference in success rate (78.5% vs 67.3%) and path efficiency (0.50 vs 0.43)\",\n    \"Combined stimulation shows similar performance to Bright Visual Only across most metrics\",\n    \"ICMS Only performs slightly better than Dim Visual Only but worse than Bright Visual Only\"\n  ],\n  \"practical_interpretation\": \"Active stimulation paradigms significantly improve navigation performance compared to sham, with visual stimulation (particularly bright visual) showing the strongest benefits. The combined stimulation does not appear to provide additional benefit over bright visual stimulation alone, suggesting visual cues may be the dominant factor in navigation improvement.\",\n  \"limitations\": [\n    \"Analysis is purely descriptive without statistical testing for significance\",\n    \"Uneven group sizes (Combined: 48,846 trials vs Sham: 3,505 trials) may affect comparisons\",\n    \"No information about within-paradigm variability or individual mouse differences\",\n    \"No control for potential confounding factors or experimental conditions\"\n  ],\n  \"recommended_next_analysis\": \"Conduct statistical hypothesis testing (ANOVA or Kruskal-Wallis) with post-hoc comparisons to determine which performance differences between stimulation paradigms are statistically significant\"\n}",
+    "done": true,
+    "done_reason": "stop",
+    "prompt_eval_count": 1130,
+    "eval_count": 576,
+    "total_token_count": 1706,
+    "total_duration": null,
+    "load_duration": null,
+    "prompt_eval_duration": null,
+    "eval_duration": null,
+    "raw_response": {
+      "id": "ohZaBSr-2dTqGa-9f5c8a4a7e60b98a",
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "{\n  \"research_question\": \"How do different stimulation paradigms affect mouse navigation performance across five key metrics\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"descriptive_findings\": [\n    \"Sham stimulation shows poorest performance across all metrics with lowest success rate (27.3%), highest time-to-target (4.68s), lowest path efficiency (0.31), lowest average speed (10.74), and lowest angular dispersion (0.24)\",\n    \"Bright Visual Only and Combined paradigms show best overall performance with success rates around 78%, time-to-target around 2.6s, path efficiency around 0.50, and average speed around 12.7\",\n    \"Dim Visual Only and ICMS Only show intermediate performance with success rates around 67-69%, time-to-target around 3.0-3.1s, and path efficiency around 0.43\",\n    \"Angular dispersion (AD) follows a similar pattern with highest values in Combined (0.40) and Bright Visual Only (0.39), intermediate in ICMS Only (0.35) and Dim Visual Only (0.34), and lowest in Sham (0.24)\"\n  ],\n  \"strongest_group_differences\": [\n    \"Sham vs all active stimulation paradigms shows largest performance gap across all metrics\",\n    \"Bright Visual Only vs Dim Visual Only shows substantial difference in success rate (78.5% vs 67.3%) and path efficiency (0.50 vs 0.43)\",\n    \"Combined stimulation shows similar performance to Bright Visual Only across most metrics\",\n    \"ICMS Only performs slightly better than Dim Visual Only but worse than Bright Visual Only\"\n  ],\n  \"practical_interpretation\": \"Active stimulation paradigms significantly improve navigation performance compared to sham, with visual stimulation (particularly bright visual) showing the strongest benefits. The combined stimulation does not appear to provide additional benefit over bright visual stimulation alone, suggesting visual cues may be the dominant factor in navigation improvement.\",\n  \"limitations\": [\n    \"Analysis is purely descriptive without statistical testing for significance\",\n    \"Uneven group sizes (Combined: 48,846 trials vs Sham: 3,505 trials) may affect comparisons\",\n    \"No information about within-paradigm variability or individual mouse differences\",\n    \"No control for potential confounding factors or experimental conditions\"\n  ],\n  \"recommended_next_analysis\": \"Conduct statistical hypothesis testing (ANOVA or Kruskal-Wallis) with post-hoc comparisons to determine which performance differences between stimulation paradigms are statistically significant\"\n}",
+            "role": "assistant",
+            "function_call": null,
+            "reasoning": null,
+            "tool_calls": []
+          },
+          "seed": null,
+          "text": null,
+          "top_logprobs": null
+        }
+      ],
+      "created": 1777782743,
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "object": "chat.completion",
+      "prompt": [],
+      "usage": {
+        "completion_tokens": 576,
+        "prompt_tokens": 1130,
+        "total_tokens": 1706,
+        "reasoning_tokens": 0
+      },
+      "warnings": null,
+      "metadata": {
+        "weight_version": "default"
+      }
+    }
+  }
+}

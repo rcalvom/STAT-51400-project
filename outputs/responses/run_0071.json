@@ -1,0 +1,52 @@
+{
+  "run_id": 71,
+  "system_prompt": "You are a careful statistician and experimental analysis assistant. Work only from the supplied data artifacts and only from the requested stimulation paradigms and performance variables. If a claim is uncertain, say so explicitly.",
+  "user_prompt": "You are running experiment `mouse_navigation_llm_doe`.\n\nRun metadata:\n- Run ID: `71`\n- Replication: `1`\n- Factor levels: `data_view=stim_summary, model=deepseek_v3_1, prompt_template=prompts/stim_paradigm_predictive.md, temperature=0.5`\n- Data view: `stim_summary`\n\nPrimary task:\nAnalyze mouse navigation performance by stimulation paradigm for the five paradigms Combined, ICMS Only, Dim Visual Only, Bright Visual Only, and Sham, using only Time-to-Target, Success, Path Efficiency, Average Speed, and AD (angular dispersion).\n\nFocus on a full inferential workflow by stimulation paradigm using only:\n- Time-to-Target\n- Success\n- Path Efficiency\n- Average Speed\n- AD\n\nInterpret AD as angular dispersion. Restrict attention to:\n- Combined\n- ICMS Only\n- Dim Visual Only\n- Bright Visual Only\n- Sham\n\nThe workflow should include:\n- ANOVA-style comparisons\n- post-hoc analysis\n- a multiple-comparison correction strategy\n- a predictive model for stimulation paradigm based on the performance variables\n\nBecause stimulation paradigm is categorical, do not force an ordinary linear regression if it is inappropriate. If a categorical-response model is better, explain that and recommend it explicitly.\n\nUse only the supplied artifacts below:\n\n## Artifact: overview_markdown\nSource file: dataset_overview.md\n```md\n# Dataset overview\n\n- Source rows: 78687\n- Rows after filters: 76655\n- Columns: 7\n- Column names: Mouse, Stim Paradigm, Time-to-Target, Success, Path Efficiency, Average Speed, AD\n- Row filters: [{'column': 'Stim Paradigm', 'include': ['Combined', 'ICMS Only', 'Dim Visual Only', 'Bright Visual Only', 'Sham']}]\n\n## Numeric summary\n\n- Time-to-Target: n=76655, missing=0, mean=2.806219, sd=2.081249, min=0.5, max=201.393291\n- Success: n=76655, missing=0, mean=0.729502, sd=0.44422, min=0.0, max=1.0\n- Path Efficiency: n=76655, missing=0, mean=0.474522, sd=0.466763, min=0.000928, max=29.817273\n- Average Speed: n=76655, missing=0, mean=12.504409, sd=4.461985, min=0.121914, max=75.350076\n- AD: n=76655, missing=0, mean=0.376686, sd=0.240308, min=0.0006, max=1.0\n\n## Categorical summary\n\n- Mouse: 8 levels. Top values: SC21LM (10986), SC21L1RF (10972), SC21L1RM (10815), SC21RM (10654), SC21RF (10572), SC11L1RF (7837), SC11RF (7586), SC11LM (7233)\n- Stim Paradigm: 5 levels. Top values: Combined (48846), ICMS Only (11378), Dim Visual Only (9603), Sham (3505), Bright Visual Only (3323)\n\n## Missingness\n\n```\n\n## Artifact: summary_by_stim_paradigm\nSource file: summary_by_stim_paradigm.csv\n```csv\nStim Paradigm,n,mean_Success,mean_Time-to-Target,mean_Path Efficiency,mean_Average Speed,mean_AD\nBright Visual Only,3323,0.784532,2.613604,0.503589,12.679067,0.38675\nCombined,48846,0.779798,2.561687,0.502167,12.833136,0.399436\nDim Visual Only,9603,0.673331,3.140079,0.434403,11.968062,0.335571\nICMS Only,11378,0.685446,3.052511,0.432378,12.039282,0.354107\nSham,3505,0.273324,4.68242,0.308436,10.737034,0.236035\n\n```\n\nReturn valid JSON only with these keys:\n- `research_question`\n- `stim_paradigms_compared`\n- `response_variables`\n- `anova_plan`\n- `posthoc_plan`\n- `multiple_comparison_strategy`\n- `predictive_model_recommendation`\n- `assumptions_and_diagnostics`\n- `expected_findings`\n- `limitations`\n- `recommended_next_analysis`\n\nUse exactly those eleven top-level keys and no others.\nDo not use performance-variable names or stimulation-paradigm names as top-level keys.\nDo not return placeholder values like \"string\"; fill each field with real content from the supplied artifacts.\nUse this JSON shape:\n{\n  \"research_question\": \"string\",\n  \"stim_paradigms_compared\": [\"string\"],\n  \"response_variables\": [\"string\"],\n  \"anova_plan\": [\"string\"],\n  \"posthoc_plan\": [\"string\"],\n  \"multiple_comparison_strategy\": \"string\",\n  \"predictive_model_recommendation\": \"string\",\n  \"assumptions_and_diagnostics\": [\"string\"],\n  \"expected_findings\": [\"string\"],\n  \"limitations\": [\"string\"],\n  \"recommended_next_analysis\": \"string\"\n}\n",
+  "response": {
+    "model": "deepseek-ai/DeepSeek-V3.1",
+    "response": "{\n  \"research_question\": \"How does stimulation paradigm affect mouse navigation performance across five performance metrics: Time-to-Target, Success, Path Efficiency, Average Speed, and Angular Dispersion (AD)\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"anova_plan\": [\"Separate one-way ANOVAs for each performance variable with Stim Paradigm as fixed factor\", \"Welch's ANOVA if variance homogeneity assumption violated\", \"Kruskal-Wallis test if normality assumption severely violated\"],\n  \"posthoc_plan\": [\"Tukey HSD test for normally distributed variables with equal variances\", \"Games-Howell test for variables with unequal variances\", \"Dunn's test with Bonferroni correction for non-parametric comparisons\"],\n  \"multiple_comparison_strategy\": \"Family-wise error rate control using Bonferroni correction across all five response variables (adjusted alpha = 0.01)\",\n  \"predictive_model_recommendation\": \"Multinomial logistic regression with Stim Paradigm as categorical response variable and all five performance metrics as predictors, given the categorical nature of the response\",\n  \"assumptions_and_diagnostics\": [\"Normality assessment using Shapiro-Wilk tests and Q-Q plots\", \"Homogeneity of variance using Levene's test\", \"Multicollinearity assessment among predictors for regression model\", \"Proportional odds assumption check for ordinal models if applicable\"],\n  \"expected_findings\": [\"Sham condition will show poorest performance across all metrics based on summary statistics\", \"Combined and Bright Visual Only paradigms likely to show best performance\", \"Significant differences between stimulation paradigms and sham control\", \"Potential interaction effects between visual and ICMS stimulation modalities\"],\n  \"limitations\": [\"Uneven group sizes (Combined: 48,846 vs Bright Visual Only: 3,323) may affect statistical power\", \"Success is binary (0/1) which may violate ANOVA assumptions\", \"Potential correlation between performance metrics not accounted for in separate ANOVAs\", \"No information about trial-level dependencies or mouse-specific effects\"],\n  \"recommended_next_analysis\": \"Mixed-effects modeling with Mouse as random effect to account for individual differences and repeated measures structure\"\n}",
+    "done": true,
+    "done_reason": "stop",
+    "prompt_eval_count": 1247,
+    "eval_count": 495,
+    "total_token_count": 1742,
+    "total_duration": null,
+    "load_duration": null,
+    "prompt_eval_duration": null,
+    "eval_duration": null,
+    "raw_response": {
+      "id": "ohaT7Uk-2dTqGa-9f5d7ce73c3d3445",
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "{\n  \"research_question\": \"How does stimulation paradigm affect mouse navigation performance across five performance metrics: Time-to-Target, Success, Path Efficiency, Average Speed, and Angular Dispersion (AD)\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"anova_plan\": [\"Separate one-way ANOVAs for each performance variable with Stim Paradigm as fixed factor\", \"Welch's ANOVA if variance homogeneity assumption violated\", \"Kruskal-Wallis test if normality assumption severely violated\"],\n  \"posthoc_plan\": [\"Tukey HSD test for normally distributed variables with equal variances\", \"Games-Howell test for variables with unequal variances\", \"Dunn's test with Bonferroni correction for non-parametric comparisons\"],\n  \"multiple_comparison_strategy\": \"Family-wise error rate control using Bonferroni correction across all five response variables (adjusted alpha = 0.01)\",\n  \"predictive_model_recommendation\": \"Multinomial logistic regression with Stim Paradigm as categorical response variable and all five performance metrics as predictors, given the categorical nature of the response\",\n  \"assumptions_and_diagnostics\": [\"Normality assessment using Shapiro-Wilk tests and Q-Q plots\", \"Homogeneity of variance using Levene's test\", \"Multicollinearity assessment among predictors for regression model\", \"Proportional odds assumption check for ordinal models if applicable\"],\n  \"expected_findings\": [\"Sham condition will show poorest performance across all metrics based on summary statistics\", \"Combined and Bright Visual Only paradigms likely to show best performance\", \"Significant differences between stimulation paradigms and sham control\", \"Potential interaction effects between visual and ICMS stimulation modalities\"],\n  \"limitations\": [\"Uneven group sizes (Combined: 48,846 vs Bright Visual Only: 3,323) may affect statistical power\", \"Success is binary (0/1) which may violate ANOVA assumptions\", \"Potential correlation between performance metrics not accounted for in separate ANOVAs\", \"No information about trial-level dependencies or mouse-specific effects\"],\n  \"recommended_next_analysis\": \"Mixed-effects modeling with Mouse as random effect to account for individual differences and repeated measures structure\"\n}",
+            "role": "assistant",
+            "function_call": null,
+            "reasoning": null,
+            "tool_calls": []
+          },
+          "seed": null,
+          "text": null,
+          "top_logprobs": null
+        }
+      ],
+      "created": 1777792674,
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "object": "chat.completion",
+      "prompt": [],
+      "usage": {
+        "completion_tokens": 495,
+        "prompt_tokens": 1247,
+        "total_tokens": 1742,
+        "reasoning_tokens": 0
+      },
+      "warnings": null,
+      "metadata": {
+        "weight_version": "default"
+      }
+    }
+  }
+}

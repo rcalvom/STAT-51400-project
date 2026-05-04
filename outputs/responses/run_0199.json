@@ -1,0 +1,52 @@
+{
+  "run_id": 199,
+  "system_prompt": "You are a careful statistician and experimental analysis assistant. Work only from the supplied data artifacts and only from the requested stimulation paradigms and performance variables. If a claim is uncertain, say so explicitly.",
+  "user_prompt": "You are running experiment `mouse_navigation_llm_doe`.\n\nRun metadata:\n- Run ID: `199`\n- Replication: `2`\n- Factor levels: `data_view=summary_only, model=deepseek_v3_1, prompt_template=prompts/stim_paradigm_basic.md, temperature=0.5`\n- Data view: `summary_only`\n\nPrimary task:\nAnalyze mouse navigation performance by stimulation paradigm for the five paradigms Combined, ICMS Only, Dim Visual Only, Bright Visual Only, and Sham, using only Time-to-Target, Success, Path Efficiency, Average Speed, and AD (angular dispersion).\n\nAnalyze performance by stimulation paradigm using only these five performance variables:\n- Time-to-Target\n- Success\n- Path Efficiency\n- Average Speed\n- AD\n\nInterpret AD as angular dispersion. Restrict attention to the five stimulation paradigms in the supplied data artifacts:\n- Combined\n- ICMS Only\n- Dim Visual Only\n- Bright Visual Only\n- Sham\n\nUse only the supplied artifacts below:\n\n## Artifact: overview_markdown\nSource file: dataset_overview.md\n```md\n# Dataset overview\n\n- Source rows: 78687\n- Rows after filters: 76655\n- Columns: 7\n- Column names: Mouse, Stim Paradigm, Time-to-Target, Success, Path Efficiency, Average Speed, AD\n- Row filters: [{'column': 'Stim Paradigm', 'include': ['Combined', 'ICMS Only', 'Dim Visual Only', 'Bright Visual Only', 'Sham']}]\n\n## Numeric summary\n\n- Time-to-Target: n=76655, missing=0, mean=2.806219, sd=2.081249, min=0.5, max=201.393291\n- Success: n=76655, missing=0, mean=0.729502, sd=0.44422, min=0.0, max=1.0\n- Path Efficiency: n=76655, missing=0, mean=0.474522, sd=0.466763, min=0.000928, max=29.817273\n- Average Speed: n=76655, missing=0, mean=12.504409, sd=4.461985, min=0.121914, max=75.350076\n- AD: n=76655, missing=0, mean=0.376686, sd=0.240308, min=0.0006, max=1.0\n\n## Categorical summary\n\n- Mouse: 8 levels. Top values: SC21LM (10986), SC21L1RF (10972), SC21L1RM (10815), SC21RM (10654), SC21RF (10572), SC11L1RF (7837), SC11RF (7586), SC11LM (7233)\n- Stim Paradigm: 5 levels. Top values: Combined (48846), ICMS Only (11378), Dim Visual Only (9603), Sham (3505), Bright Visual Only (3323)\n\n## Missingness\n\n```\n\nReturn valid JSON only with these keys:\n- `research_question`\n- `stim_paradigms_compared`\n- `response_variables`\n- `descriptive_findings`\n- `strongest_group_differences`\n- `practical_interpretation`\n- `limitations`\n- `recommended_next_analysis`\n\nUse exactly those eight top-level keys and no others.\nDo not use performance-variable names or stimulation-paradigm names as top-level keys.\nDo not return placeholder values like \"string\"; fill each field with real content from the supplied artifacts.\nUse this JSON shape:\n{\n  \"research_question\": \"string\",\n  \"stim_paradigms_compared\": [\"string\"],\n  \"response_variables\": [\"string\"],\n  \"descriptive_findings\": [\"string\"],\n  \"strongest_group_differences\": [\"string\"],\n  \"practical_interpretation\": \"string\",\n  \"limitations\": [\"string\"],\n  \"recommended_next_analysis\": \"string\"\n}\n",
+  "response": {
+    "model": "deepseek-ai/DeepSeek-V3.1",
+    "response": "{\n  \"research_question\": \"How do different stimulation paradigms affect mouse navigation performance as measured by Time-to-Target, Success, Path Efficiency, Average Speed, and Angular Dispersion?\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"descriptive_findings\": [\"Dataset contains 76,655 observations across 8 mice and 5 stimulation paradigms\", \"Combined paradigm has the highest representation with 48,846 observations (63.7% of total)\", \"Success rate across all paradigms is 72.95%\", \"Mean Time-to-Target is 2.81 seconds with standard deviation of 2.08\", \"Average Speed shows moderate variability with mean 12.50 and SD 4.46\", \"Angular Dispersion (AD) mean is 0.38 with SD 0.24\"],\n  \"strongest_group_differences\": [\"Substantial variation in sample sizes across paradigms: Combined (48,846) vs Bright Visual Only (3,323)\", \"Success rate shows binary outcomes (0-1) with mean 0.73 across all paradigms\", \"Time-to-Target ranges widely from 0.5 to 201.4 seconds indicating potential outliers\", \"Path Efficiency shows extreme range from 0.0009 to 29.82 suggesting highly variable navigation quality\"],\n  \"practical_interpretation\": \"The Combined stimulation paradigm dominates the dataset composition, while all paradigms show substantial variability in navigation performance metrics. The wide ranges in Time-to-Target and Path Efficiency suggest that stimulation type may significantly impact navigation efficiency, though the unequal group sizes and potential outliers require careful interpretation.\",\n  \"limitations\": [\"Severely imbalanced group sizes may affect statistical comparisons\", \"No statistical tests or confidence intervals provided in summary data\", \"Cannot determine statistical significance of observed differences\", \"Potential outliers present in Time-to-Target (max 201.4s) and Path Efficiency (max 29.82)\", \"No information about within-paradigm variability or distribution shapes\"],\n  \"recommended_next_analysis\": \"Conduct formal statistical comparison using ANOVA or Kruskal-Wallis tests with post-hoc comparisons to determine which stimulation paradigms differ significantly on each performance metric, while accounting for the substantial sample size imbalance and potential outliers.\"\n}",
+    "done": true,
+    "done_reason": "stop",
+    "prompt_eval_count": 912,
+    "eval_count": 513,
+    "total_token_count": 1425,
+    "total_duration": null,
+    "load_duration": null,
+    "prompt_eval_duration": null,
+    "eval_duration": null,
+    "raw_response": {
+      "id": "ohaMoho-2byqsH-9f5d63a04a7fe251",
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "{\n  \"research_question\": \"How do different stimulation paradigms affect mouse navigation performance as measured by Time-to-Target, Success, Path Efficiency, Average Speed, and Angular Dispersion?\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"descriptive_findings\": [\"Dataset contains 76,655 observations across 8 mice and 5 stimulation paradigms\", \"Combined paradigm has the highest representation with 48,846 observations (63.7% of total)\", \"Success rate across all paradigms is 72.95%\", \"Mean Time-to-Target is 2.81 seconds with standard deviation of 2.08\", \"Average Speed shows moderate variability with mean 12.50 and SD 4.46\", \"Angular Dispersion (AD) mean is 0.38 with SD 0.24\"],\n  \"strongest_group_differences\": [\"Substantial variation in sample sizes across paradigms: Combined (48,846) vs Bright Visual Only (3,323)\", \"Success rate shows binary outcomes (0-1) with mean 0.73 across all paradigms\", \"Time-to-Target ranges widely from 0.5 to 201.4 seconds indicating potential outliers\", \"Path Efficiency shows extreme range from 0.0009 to 29.82 suggesting highly variable navigation quality\"],\n  \"practical_interpretation\": \"The Combined stimulation paradigm dominates the dataset composition, while all paradigms show substantial variability in navigation performance metrics. The wide ranges in Time-to-Target and Path Efficiency suggest that stimulation type may significantly impact navigation efficiency, though the unequal group sizes and potential outliers require careful interpretation.\",\n  \"limitations\": [\"Severely imbalanced group sizes may affect statistical comparisons\", \"No statistical tests or confidence intervals provided in summary data\", \"Cannot determine statistical significance of observed differences\", \"Potential outliers present in Time-to-Target (max 201.4s) and Path Efficiency (max 29.82)\", \"No information about within-paradigm variability or distribution shapes\"],\n  \"recommended_next_analysis\": \"Conduct formal statistical comparison using ANOVA or Kruskal-Wallis tests with post-hoc comparisons to determine which stimulation paradigms differ significantly on each performance metric, while accounting for the substantial sample size imbalance and potential outliers.\"\n}",
+            "role": "assistant",
+            "function_call": null,
+            "reasoning": null,
+            "tool_calls": []
+          },
+          "seed": null,
+          "text": null,
+          "top_logprobs": null
+        }
+      ],
+      "created": 1777791645,
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "object": "chat.completion",
+      "prompt": [],
+      "usage": {
+        "completion_tokens": 513,
+        "prompt_tokens": 912,
+        "total_tokens": 1425,
+        "reasoning_tokens": 0
+      },
+      "warnings": null,
+      "metadata": {
+        "weight_version": "default"
+      }
+    }
+  }
+}

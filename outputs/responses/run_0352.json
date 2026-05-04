@@ -1,0 +1,52 @@
+{
+  "run_id": 352,
+  "system_prompt": "You are a careful statistician and experimental analysis assistant. Work only from the supplied data artifacts and only from the requested stimulation paradigms and performance variables. If a claim is uncertain, say so explicitly.",
+  "user_prompt": "You are running experiment `mouse_navigation_llm_doe`.\n\nRun metadata:\n- Run ID: `352`\n- Replication: `3`\n- Factor levels: `data_view=summary_only, model=deepseek_v3_1, prompt_template=prompts/stim_paradigm_basic.md, temperature=1.0`\n- Data view: `summary_only`\n\nPrimary task:\nAnalyze mouse navigation performance by stimulation paradigm for the five paradigms Combined, ICMS Only, Dim Visual Only, Bright Visual Only, and Sham, using only Time-to-Target, Success, Path Efficiency, Average Speed, and AD (angular dispersion).\n\nAnalyze performance by stimulation paradigm using only these five performance variables:\n- Time-to-Target\n- Success\n- Path Efficiency\n- Average Speed\n- AD\n\nInterpret AD as angular dispersion. Restrict attention to the five stimulation paradigms in the supplied data artifacts:\n- Combined\n- ICMS Only\n- Dim Visual Only\n- Bright Visual Only\n- Sham\n\nUse only the supplied artifacts below:\n\n## Artifact: overview_markdown\nSource file: dataset_overview.md\n```md\n# Dataset overview\n\n- Source rows: 78687\n- Rows after filters: 76655\n- Columns: 7\n- Column names: Mouse, Stim Paradigm, Time-to-Target, Success, Path Efficiency, Average Speed, AD\n- Row filters: [{'column': 'Stim Paradigm', 'include': ['Combined', 'ICMS Only', 'Dim Visual Only', 'Bright Visual Only', 'Sham']}]\n\n## Numeric summary\n\n- Time-to-Target: n=76655, missing=0, mean=2.806219, sd=2.081249, min=0.5, max=201.393291\n- Success: n=76655, missing=0, mean=0.729502, sd=0.44422, min=0.0, max=1.0\n- Path Efficiency: n=76655, missing=0, mean=0.474522, sd=0.466763, min=0.000928, max=29.817273\n- Average Speed: n=76655, missing=0, mean=12.504409, sd=4.461985, min=0.121914, max=75.350076\n- AD: n=76655, missing=0, mean=0.376686, sd=0.240308, min=0.0006, max=1.0\n\n## Categorical summary\n\n- Mouse: 8 levels. Top values: SC21LM (10986), SC21L1RF (10972), SC21L1RM (10815), SC21RM (10654), SC21RF (10572), SC11L1RF (7837), SC11RF (7586), SC11LM (7233)\n- Stim Paradigm: 5 levels. Top values: Combined (48846), ICMS Only (11378), Dim Visual Only (9603), Sham (3505), Bright Visual Only (3323)\n\n## Missingness\n\n```\n\nReturn valid JSON only with these keys:\n- `research_question`\n- `stim_paradigms_compared`\n- `response_variables`\n- `descriptive_findings`\n- `strongest_group_differences`\n- `practical_interpretation`\n- `limitations`\n- `recommended_next_analysis`\n\nUse exactly those eight top-level keys and no others.\nDo not use performance-variable names or stimulation-paradigm names as top-level keys.\nDo not return placeholder values like \"string\"; fill each field with real content from the supplied artifacts.\nUse this JSON shape:\n{\n  \"research_question\": \"string\",\n  \"stim_paradigms_compared\": [\"string\"],\n  \"response_variables\": [\"string\"],\n  \"descriptive_findings\": [\"string\"],\n  \"strongest_group_differences\": [\"string\"],\n  \"practical_interpretation\": \"string\",\n  \"limitations\": [\"string\"],\n  \"recommended_next_analysis\": \"string\"\n}\n",
+  "response": {
+    "model": "deepseek-ai/DeepSeek-V3.1",
+    "response": "{\n  \"research_question\": \"How do stimulation paradigms (Combined, ICMS Only, Dim Visual Only, Bright Visual Only, Sham) affect mouse navigation performance across Time-to-Target, Success, Path Efficiency, Average Speed, and Angular Dispersion (AD)?\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"descriptive_findings\": [\n    \"Combined stimulation is the most frequent paradigm (48,846 trials), followed by ICMS Only (11,378), Dim Visual Only (9,603), Sham (3,505), and Bright Visual Only (3,323)\",\n    \"Overall mean Time-to-Target is 2.81s (SD=2.08), Success rate is 73%, Path Efficiency is 0.47 (SD=0.47), Average Speed is 12.50 units (SD=4.46), and Angular Dispersion (AD) is 0.38 (SD=0.24)\",\n    \"Sample sizes vary substantially across paradigms, with Combined representing nearly 64% of trials\"\n  ],\n  \"strongest_group_differences\": [\n    \"Bright Visual Only has the smallest sample (3,323 trials) while Combined has the largest (48,846), suggesting potential precision differences\",\n    \"Sham and Bright Visual Only paradigms have fewer than half the trials of Dim Visual Only and ICMS Only, which may affect comparison reliability\",\n    \"All performance variables show substantial variability (SD ranges from 0.24-4.46 relative to means), indicating individual trial differences within paradigms\"\n  ],\n  \"practical_interpretation\": \"The Combined stimulation paradigm dominates the dataset, while visual-only conditions (especially Bright Visual Only) are underrepresented. All performance metrics show substantial variability across trials, suggesting that stimulation effects may be context-dependent. The large sample size for Combined stimulation may provide more precise estimates for that condition compared to others.\",\n  \"limitations\": [\n    \"Imbalanced group sizes: Combined has ~15x more trials than Bright Visual Only, potentially biasing comparisons\",\n    \"No inferential statistics provided: Only descriptive summaries are available, preventing claims about statistical significance\",\n    \"No within-paradigm breakdown: Cannot assess performance trends across mice or sessions within each paradigm\",\n    \"Unknown measurement units: Speed, Time-to-Target, and AD units are not specified, limiting interpretation\"\n  ],\n  \"recommended_next_analysis\": \"Perform statistical comparisons (ANOVA or non-parametric equivalents) across stimulation paradigms for each performance variable, with appropriate corrections for multiple comparisons and consideration of the imbalanced sample sizes.\"\n}",
+    "done": true,
+    "done_reason": "stop",
+    "prompt_eval_count": 912,
+    "eval_count": 580,
+    "total_token_count": 1492,
+    "total_duration": null,
+    "load_duration": null,
+    "prompt_eval_duration": null,
+    "eval_duration": null,
+    "raw_response": {
+      "id": "oha5rWX-2dTqGa-9f5d17a41e585af6",
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "{\n  \"research_question\": \"How do stimulation paradigms (Combined, ICMS Only, Dim Visual Only, Bright Visual Only, Sham) affect mouse navigation performance across Time-to-Target, Success, Path Efficiency, Average Speed, and Angular Dispersion (AD)?\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"descriptive_findings\": [\n    \"Combined stimulation is the most frequent paradigm (48,846 trials), followed by ICMS Only (11,378), Dim Visual Only (9,603), Sham (3,505), and Bright Visual Only (3,323)\",\n    \"Overall mean Time-to-Target is 2.81s (SD=2.08), Success rate is 73%, Path Efficiency is 0.47 (SD=0.47), Average Speed is 12.50 units (SD=4.46), and Angular Dispersion (AD) is 0.38 (SD=0.24)\",\n    \"Sample sizes vary substantially across paradigms, with Combined representing nearly 64% of trials\"\n  ],\n  \"strongest_group_differences\": [\n    \"Bright Visual Only has the smallest sample (3,323 trials) while Combined has the largest (48,846), suggesting potential precision differences\",\n    \"Sham and Bright Visual Only paradigms have fewer than half the trials of Dim Visual Only and ICMS Only, which may affect comparison reliability\",\n    \"All performance variables show substantial variability (SD ranges from 0.24-4.46 relative to means), indicating individual trial differences within paradigms\"\n  ],\n  \"practical_interpretation\": \"The Combined stimulation paradigm dominates the dataset, while visual-only conditions (especially Bright Visual Only) are underrepresented. All performance metrics show substantial variability across trials, suggesting that stimulation effects may be context-dependent. The large sample size for Combined stimulation may provide more precise estimates for that condition compared to others.\",\n  \"limitations\": [\n    \"Imbalanced group sizes: Combined has ~15x more trials than Bright Visual Only, potentially biasing comparisons\",\n    \"No inferential statistics provided: Only descriptive summaries are available, preventing claims about statistical significance\",\n    \"No within-paradigm breakdown: Cannot assess performance trends across mice or sessions within each paradigm\",\n    \"Unknown measurement units: Speed, Time-to-Target, and AD units are not specified, limiting interpretation\"\n  ],\n  \"recommended_next_analysis\": \"Perform statistical comparisons (ANOVA or non-parametric equivalents) across stimulation paradigms for each performance variable, with appropriate corrections for multiple comparisons and consideration of the imbalanced sample sizes.\"\n}",
+            "role": "assistant",
+            "function_call": null,
+            "reasoning": null,
+            "tool_calls": []
+          },
+          "seed": null,
+          "text": null,
+          "top_logprobs": null
+        }
+      ],
+      "created": 1777788531,
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "object": "chat.completion",
+      "prompt": [],
+      "usage": {
+        "completion_tokens": 580,
+        "prompt_tokens": 912,
+        "total_tokens": 1492,
+        "reasoning_tokens": 0
+      },
+      "warnings": null,
+      "metadata": {
+        "weight_version": "default"
+      }
+    }
+  }
+}

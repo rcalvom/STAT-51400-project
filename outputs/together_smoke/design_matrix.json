@@ -1,0 +1,36 @@
+{
+  "random_seed": 51400,
+  "replications": 1,
+  "randomized": false,
+  "factors": [
+    "model",
+    "temperature",
+    "prompt_template",
+    "data_view"
+  ],
+  "runs": [
+    {
+      "run_id": 1,
+      "replication": 1,
+      "factor_levels": {
+        "model": "qwen3_5_9b",
+        "temperature": "0.1",
+        "prompt_template": "prompts/stim_paradigm_basic.md",
+        "data_view": "stim_summary"
+      },
+      "settings": {
+        "inference_options": {
+          "max_tokens": 1800,
+          "reasoning": {
+            "enabled": false
+          },
+          "temperature": 0.1
+        },
+        "model": "Qwen/Qwen3.5-9B",
+        "prompt_template": "prompts/stim_paradigm_basic.md",
+        "data_view": "stim_summary"
+      },
+      "randomized_position": 1
+    }
+  ]
+}

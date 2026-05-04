@@ -1,0 +1,52 @@
+{
+  "run_id": 211,
+  "system_prompt": "You are a careful statistician and experimental analysis assistant. Work only from the supplied data artifacts and only from the requested stimulation paradigms and performance variables. If a claim is uncertain, say so explicitly.",
+  "user_prompt": "You are running experiment `mouse_navigation_llm_doe`.\n\nRun metadata:\n- Run ID: `211`\n- Replication: `2`\n- Factor levels: `data_view=summary_only, model=deepseek_v3_1, prompt_template=prompts/stim_paradigm_anova.md, temperature=0.75`\n- Data view: `summary_only`\n\nPrimary task:\nAnalyze mouse navigation performance by stimulation paradigm for the five paradigms Combined, ICMS Only, Dim Visual Only, Bright Visual Only, and Sham, using only Time-to-Target, Success, Path Efficiency, Average Speed, and AD (angular dispersion).\n\nFocus on formal inference by stimulation paradigm using only:\n- Time-to-Target\n- Success\n- Path Efficiency\n- Average Speed\n- AD\n\nInterpret AD as angular dispersion. Restrict attention to:\n- Combined\n- ICMS Only\n- Dim Visual Only\n- Bright Visual Only\n- Sham\n\nAsk for or describe:\n- an ANOVA-style comparison strategy for each response variable\n- assumptions and diagnostics\n- post-hoc analysis when the omnibus result is meaningful\n\nIf a response variable makes plain ANOVA inappropriate, say so and name a better alternative.\n\nUse only the supplied artifacts below:\n\n## Artifact: overview_markdown\nSource file: dataset_overview.md\n```md\n# Dataset overview\n\n- Source rows: 78687\n- Rows after filters: 76655\n- Columns: 7\n- Column names: Mouse, Stim Paradigm, Time-to-Target, Success, Path Efficiency, Average Speed, AD\n- Row filters: [{'column': 'Stim Paradigm', 'include': ['Combined', 'ICMS Only', 'Dim Visual Only', 'Bright Visual Only', 'Sham']}]\n\n## Numeric summary\n\n- Time-to-Target: n=76655, missing=0, mean=2.806219, sd=2.081249, min=0.5, max=201.393291\n- Success: n=76655, missing=0, mean=0.729502, sd=0.44422, min=0.0, max=1.0\n- Path Efficiency: n=76655, missing=0, mean=0.474522, sd=0.466763, min=0.000928, max=29.817273\n- Average Speed: n=76655, missing=0, mean=12.504409, sd=4.461985, min=0.121914, max=75.350076\n- AD: n=76655, missing=0, mean=0.376686, sd=0.240308, min=0.0006, max=1.0\n\n## Categorical summary\n\n- Mouse: 8 levels. Top values: SC21LM (10986), SC21L1RF (10972), SC21L1RM (10815), SC21RM (10654), SC21RF (10572), SC11L1RF (7837), SC11RF (7586), SC11LM (7233)\n- Stim Paradigm: 5 levels. Top values: Combined (48846), ICMS Only (11378), Dim Visual Only (9603), Sham (3505), Bright Visual Only (3323)\n\n## Missingness\n\n```\n\nReturn valid JSON only with these keys:\n- `research_question`\n- `stim_paradigms_compared`\n- `response_variables`\n- `anova_plan`\n- `assumptions_and_diagnostics`\n- `posthoc_plan`\n- `expected_findings`\n- `limitations`\n- `recommended_next_analysis`\n\nUse exactly those nine top-level keys and no others.\nDo not use performance-variable names or stimulation-paradigm names as top-level keys.\nDo not return placeholder values like \"string\"; fill each field with real content from the supplied artifacts.\nUse this JSON shape:\n{\n  \"research_question\": \"string\",\n  \"stim_paradigms_compared\": [\"string\"],\n  \"response_variables\": [\"string\"],\n  \"anova_plan\": [\"string\"],\n  \"assumptions_and_diagnostics\": [\"string\"],\n  \"posthoc_plan\": [\"string\"],\n  \"expected_findings\": [\"string\"],\n  \"limitations\": [\"string\"],\n  \"recommended_next_analysis\": \"string\"\n}\n",
+  "response": {
+    "model": "deepseek-ai/DeepSeek-V3.1",
+    "response": "{\n  \"research_question\": \"How does stimulation paradigm affect mouse navigation performance across five metrics: Time-to-Target, Success, Path Efficiency, Average Speed, and Angular Dispersion (AD)?\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"anova_plan\": [\n    \"One-way ANOVA for each continuous response variable (Time-to-Target, Path Efficiency, Average Speed, AD) with Stim Paradigm as factor\",\n    \"Kruskal-Wallis test for Success (binary outcome) as ANOVA assumptions are violated for binary data\"\n  ],\n  \"assumptions_and_diagnostics\": [\n    \"Normality: Shapiro-Wilk test on residuals for continuous variables\",\n    \"Homogeneity of variance: Levene's test for continuous variables\",\n    \"Independence: Assumed from experimental design\",\n    \"Binary outcome: Success requires non-parametric alternative\"\n  ],\n  \"posthoc_plan\": [\n    \"Tukey HSD for continuous variables if ANOVA significant\",\n    \"Dunn's test with Bonferroni correction for Success if Kruskal-Wallis significant\"\n  ],\n  \"expected_findings\": [\n    \"Combined stimulation may show best performance (lower Time-to-Target, higher Success, higher Path Efficiency)\",\n    \"Sham condition may show poorest performance across metrics\",\n    \"Visual-only conditions may show intermediate performance between Combined and Sham\",\n    \"Angular dispersion may be lowest in Combined condition\"\n  ],\n  \"limitations\": [\n    \"Large sample sizes may produce statistically significant but practically trivial effects\",\n    \"Binary Success variable limits parametric analysis options\",\n    \"Uneven group sizes (Combined: 48846 vs Sham: 3505) may affect variance homogeneity\",\n    \"No information about distribution shapes or outliers available\"\n  ],\n  \"recommended_next_analysis\": \"Examine mouse-level random effects using mixed-effects models to account for individual variability across the 8 mice\"\n}",
+    "done": true,
+    "done_reason": "stop",
+    "prompt_eval_count": 961,
+    "eval_count": 443,
+    "total_token_count": 1404,
+    "total_duration": null,
+    "load_duration": null,
+    "prompt_eval_duration": null,
+    "eval_duration": null,
+    "raw_response": {
+      "id": "ohZvsXz-2dTqGa-9f5cecda99e9f92b",
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "{\n  \"research_question\": \"How does stimulation paradigm affect mouse navigation performance across five metrics: Time-to-Target, Success, Path Efficiency, Average Speed, and Angular Dispersion (AD)?\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"anova_plan\": [\n    \"One-way ANOVA for each continuous response variable (Time-to-Target, Path Efficiency, Average Speed, AD) with Stim Paradigm as factor\",\n    \"Kruskal-Wallis test for Success (binary outcome) as ANOVA assumptions are violated for binary data\"\n  ],\n  \"assumptions_and_diagnostics\": [\n    \"Normality: Shapiro-Wilk test on residuals for continuous variables\",\n    \"Homogeneity of variance: Levene's test for continuous variables\",\n    \"Independence: Assumed from experimental design\",\n    \"Binary outcome: Success requires non-parametric alternative\"\n  ],\n  \"posthoc_plan\": [\n    \"Tukey HSD for continuous variables if ANOVA significant\",\n    \"Dunn's test with Bonferroni correction for Success if Kruskal-Wallis significant\"\n  ],\n  \"expected_findings\": [\n    \"Combined stimulation may show best performance (lower Time-to-Target, higher Success, higher Path Efficiency)\",\n    \"Sham condition may show poorest performance across metrics\",\n    \"Visual-only conditions may show intermediate performance between Combined and Sham\",\n    \"Angular dispersion may be lowest in Combined condition\"\n  ],\n  \"limitations\": [\n    \"Large sample sizes may produce statistically significant but practically trivial effects\",\n    \"Binary Success variable limits parametric analysis options\",\n    \"Uneven group sizes (Combined: 48846 vs Sham: 3505) may affect variance homogeneity\",\n    \"No information about distribution shapes or outliers available\"\n  ],\n  \"recommended_next_analysis\": \"Examine mouse-level random effects using mixed-effects models to account for individual variability across the 8 mice\"\n}",
+            "role": "assistant",
+            "function_call": null,
+            "reasoning": null,
+            "tool_calls": []
+          },
+          "seed": null,
+          "text": null,
+          "top_logprobs": null
+        }
+      ],
+      "created": 1777786777,
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "object": "chat.completion",
+      "prompt": [],
+      "usage": {
+        "completion_tokens": 443,
+        "prompt_tokens": 961,
+        "total_tokens": 1404,
+        "reasoning_tokens": 0
+      },
+      "warnings": null,
+      "metadata": {
+        "weight_version": "default"
+      }
+    }
+  }
+}

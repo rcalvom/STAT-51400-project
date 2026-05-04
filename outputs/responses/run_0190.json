@@ -1,0 +1,52 @@
+{
+  "run_id": 190,
+  "system_prompt": "You are a careful statistician and experimental analysis assistant. Work only from the supplied data artifacts and only from the requested stimulation paradigms and performance variables. If a claim is uncertain, say so explicitly.",
+  "user_prompt": "You are running experiment `mouse_navigation_llm_doe`.\n\nRun metadata:\n- Run ID: `190`\n- Replication: `2`\n- Factor levels: `data_view=summary_only, model=deepseek_v3_1, prompt_template=prompts/stim_paradigm_basic.md, temperature=0.25`\n- Data view: `summary_only`\n\nPrimary task:\nAnalyze mouse navigation performance by stimulation paradigm for the five paradigms Combined, ICMS Only, Dim Visual Only, Bright Visual Only, and Sham, using only Time-to-Target, Success, Path Efficiency, Average Speed, and AD (angular dispersion).\n\nAnalyze performance by stimulation paradigm using only these five performance variables:\n- Time-to-Target\n- Success\n- Path Efficiency\n- Average Speed\n- AD\n\nInterpret AD as angular dispersion. Restrict attention to the five stimulation paradigms in the supplied data artifacts:\n- Combined\n- ICMS Only\n- Dim Visual Only\n- Bright Visual Only\n- Sham\n\nUse only the supplied artifacts below:\n\n## Artifact: overview_markdown\nSource file: dataset_overview.md\n```md\n# Dataset overview\n\n- Source rows: 78687\n- Rows after filters: 76655\n- Columns: 7\n- Column names: Mouse, Stim Paradigm, Time-to-Target, Success, Path Efficiency, Average Speed, AD\n- Row filters: [{'column': 'Stim Paradigm', 'include': ['Combined', 'ICMS Only', 'Dim Visual Only', 'Bright Visual Only', 'Sham']}]\n\n## Numeric summary\n\n- Time-to-Target: n=76655, missing=0, mean=2.806219, sd=2.081249, min=0.5, max=201.393291\n- Success: n=76655, missing=0, mean=0.729502, sd=0.44422, min=0.0, max=1.0\n- Path Efficiency: n=76655, missing=0, mean=0.474522, sd=0.466763, min=0.000928, max=29.817273\n- Average Speed: n=76655, missing=0, mean=12.504409, sd=4.461985, min=0.121914, max=75.350076\n- AD: n=76655, missing=0, mean=0.376686, sd=0.240308, min=0.0006, max=1.0\n\n## Categorical summary\n\n- Mouse: 8 levels. Top values: SC21LM (10986), SC21L1RF (10972), SC21L1RM (10815), SC21RM (10654), SC21RF (10572), SC11L1RF (7837), SC11RF (7586), SC11LM (7233)\n- Stim Paradigm: 5 levels. Top values: Combined (48846), ICMS Only (11378), Dim Visual Only (9603), Sham (3505), Bright Visual Only (3323)\n\n## Missingness\n\n```\n\nReturn valid JSON only with these keys:\n- `research_question`\n- `stim_paradigms_compared`\n- `response_variables`\n- `descriptive_findings`\n- `strongest_group_differences`\n- `practical_interpretation`\n- `limitations`\n- `recommended_next_analysis`\n\nUse exactly those eight top-level keys and no others.\nDo not use performance-variable names or stimulation-paradigm names as top-level keys.\nDo not return placeholder values like \"string\"; fill each field with real content from the supplied artifacts.\nUse this JSON shape:\n{\n  \"research_question\": \"string\",\n  \"stim_paradigms_compared\": [\"string\"],\n  \"response_variables\": [\"string\"],\n  \"descriptive_findings\": [\"string\"],\n  \"strongest_group_differences\": [\"string\"],\n  \"practical_interpretation\": \"string\",\n  \"limitations\": [\"string\"],\n  \"recommended_next_analysis\": \"string\"\n}\n",
+  "response": {
+    "model": "deepseek-ai/DeepSeek-V3.1",
+    "response": "{\n  \"research_question\": \"How does mouse navigation performance differ across five stimulation paradigms: Combined, ICMS Only, Dim Visual Only, Bright Visual Only, and Sham?\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"descriptive_findings\": [\"Dataset contains 76,655 observations across 5 stimulation paradigms\", \"Combined paradigm has the most observations (48,846), Bright Visual Only has the fewest (3,323)\", \"Average Time-to-Target is 2.81 seconds with substantial variability (SD=2.08)\", \"Success rate across all paradigms is 73%\", \"Path Efficiency averages 0.47 with high variability (SD=0.47)\", \"Average Speed is 12.50 units with moderate variability (SD=4.46)\", \"Angular Dispersion (AD) averages 0.38 with moderate variability (SD=0.24)\"],\n  \"strongest_group_differences\": [\"Cannot determine specific group differences from summary statistics alone - only overall dataset summaries are provided\", \"No paradigm-specific descriptive statistics are available in the artifacts to compare performance across stimulation conditions\"],\n  \"practical_interpretation\": \"The dataset provides comprehensive navigation performance data across multiple stimulation paradigms, but without paradigm-specific summary statistics, we cannot determine which stimulation approach yields optimal navigation performance. The overall dataset shows moderate navigation performance with room for improvement across all measured variables.\",\n  \"limitations\": [\"Only overall dataset summaries are provided - no paradigm-specific descriptive statistics\", \"Cannot assess performance differences between stimulation paradigms with current data artifacts\", \"No statistical comparisons or effect sizes are available\", \"Data distribution across paradigms is uneven (Combined has 48,846 observations while Bright Visual Only has only 3,323)\"],\n  \"recommended_next_analysis\": \"Calculate and compare paradigm-specific descriptive statistics (means, standard deviations) for each performance variable to identify potential differences between stimulation conditions\"\n}",
+    "done": true,
+    "done_reason": "stop",
+    "prompt_eval_count": 912,
+    "eval_count": 442,
+    "total_token_count": 1354,
+    "total_duration": null,
+    "load_duration": null,
+    "prompt_eval_duration": null,
+    "eval_duration": null,
+    "raw_response": {
+      "id": "ohZgBRp-2dTqGa-9f5ca6defa6bf606",
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "{\n  \"research_question\": \"How does mouse navigation performance differ across five stimulation paradigms: Combined, ICMS Only, Dim Visual Only, Bright Visual Only, and Sham?\",\n  \"stim_paradigms_compared\": [\"Combined\", \"ICMS Only\", \"Dim Visual Only\", \"Bright Visual Only\", \"Sham\"],\n  \"response_variables\": [\"Time-to-Target\", \"Success\", \"Path Efficiency\", \"Average Speed\", \"AD\"],\n  \"descriptive_findings\": [\"Dataset contains 76,655 observations across 5 stimulation paradigms\", \"Combined paradigm has the most observations (48,846), Bright Visual Only has the fewest (3,323)\", \"Average Time-to-Target is 2.81 seconds with substantial variability (SD=2.08)\", \"Success rate across all paradigms is 73%\", \"Path Efficiency averages 0.47 with high variability (SD=0.47)\", \"Average Speed is 12.50 units with moderate variability (SD=4.46)\", \"Angular Dispersion (AD) averages 0.38 with moderate variability (SD=0.24)\"],\n  \"strongest_group_differences\": [\"Cannot determine specific group differences from summary statistics alone - only overall dataset summaries are provided\", \"No paradigm-specific descriptive statistics are available in the artifacts to compare performance across stimulation conditions\"],\n  \"practical_interpretation\": \"The dataset provides comprehensive navigation performance data across multiple stimulation paradigms, but without paradigm-specific summary statistics, we cannot determine which stimulation approach yields optimal navigation performance. The overall dataset shows moderate navigation performance with room for improvement across all measured variables.\",\n  \"limitations\": [\"Only overall dataset summaries are provided - no paradigm-specific descriptive statistics\", \"Cannot assess performance differences between stimulation paradigms with current data artifacts\", \"No statistical comparisons or effect sizes are available\", \"Data distribution across paradigms is uneven (Combined has 48,846 observations while Bright Visual Only has only 3,323)\"],\n  \"recommended_next_analysis\": \"Calculate and compare paradigm-specific descriptive statistics (means, standard deviations) for each performance variable to identify potential differences between stimulation conditions\"\n}",
+            "role": "assistant",
+            "function_call": null,
+            "reasoning": null,
+            "tool_calls": []
+          },
+          "seed": null,
+          "text": null,
+          "top_logprobs": null
+        }
+      ],
+      "created": 1777783912,
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "object": "chat.completion",
+      "prompt": [],
+      "usage": {
+        "completion_tokens": 442,
+        "prompt_tokens": 912,
+        "total_tokens": 1354,
+        "reasoning_tokens": 0
+      },
+      "warnings": null,
+      "metadata": {
+        "weight_version": "default"
+      }
+    }
+  }
+}
