@@ -243,7 +243,8 @@ interaction.plot(
   lwd = 2,
   ylab = "Mean total tokens",
   xlab = "Data view",
-  main = "Model x Data View Interaction for Token Usage"
+  main = "Model x Data View Interaction for Token Usage",
+  legend = FALSE
 )
 legend(
   "topleft",
@@ -282,7 +283,8 @@ interaction.plot(
   lwd = 2,
   ylab = "Mean wall-clock seconds",
   xlab = "Prompt template",
-  main = "Model x Prompt Pattern for Runtime"
+  main = "Model x Prompt Pattern for Runtime",
+  legend = FALSE
 )
 legend(
   "topleft",
